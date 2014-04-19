@@ -27,6 +27,22 @@ class Ball
 
   def update
     @ball.move!
+
+    if button_down?(Gosu::KbUp)
+      @right_paddle.up!
+    end
+
+    if button_down?(Gosu::KbDown)
+      @right_paddle.down!
+    end
+
+    if @ball.intersect?(@left_paddle)
+      @ball.bounce_off_paddle!(@left_paddle)
+    end
+
+    if @ball.intersect?(@right_paddle)
+      @ball.bounce_off_paddle!(@right_paddle)
+    end
   end
 
   def dx; Gosu.offset_x(angle, speed); end
