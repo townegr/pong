@@ -72,6 +72,13 @@ class Pong < Hasu::Window
       @ball.bounce_off_paddle!(@right_paddle)
     end
   end
+
+  def button_down(button)
+    case button
+    when Gosu::KbEscape
+      close
+    end
+  end
 end
 
 Pong.run
