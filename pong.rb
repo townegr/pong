@@ -2,6 +2,7 @@ require 'hasu'
 require 'pry'
 
 Hasu.load 'ball.rb'
+Hasu.load 'paddle.rb'
 
 class Pong < Hasu::Window
   WIDTH = 768
@@ -13,6 +14,8 @@ class Pong < Hasu::Window
 
   def reset
     @ball = Ball.new
+    @left_paddle = Paddle.new(:left)
+    @right_paddle = Paddle.new(:right)
 
     @left_score = 0
     @right_score = 0
@@ -22,6 +25,8 @@ class Pong < Hasu::Window
 
   def draw
     @ball.draw(self)
+    @left_paddle.draw(self)
+    @right_paddle.draw(self)
 
     @font.draw(@left_score, 30, 30, 0)
     @font.draw(@right_score, WIDTH - 50, 30, 0)
