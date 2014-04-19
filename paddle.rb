@@ -43,10 +43,18 @@ class Paddle
   end
 
   def up!
-    @y -= 4
+    @y -= SPEED
+
+    if y1 < 0
+      @y = HEIGHT/2
+    end
   end
 
   def down!
-    @y += 4
+    @y += SPEED
+
+    if y2 > Pong::HEIGHT
+      @y = Pong::HEIGHT - HEIGHT/2
+    end
   end
 end
