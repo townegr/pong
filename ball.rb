@@ -6,7 +6,7 @@ class Ball
     @x = Pong::WIDTH/2
     @y = Pong::HEIGHT/2
     @angle = 45
-    @angle = 5
+    @speed = 5
   end
 
   def x1; @x - SIZE/2; end
