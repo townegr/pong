@@ -1,10 +1,12 @@
 class Ball
-  attr_reader :x, :y
+  attr_reader :x, :y, :angle, :speed
   SIZE = 10
 
   def initialize
     @x = Pong::WIDTH/2
     @y = Pong::HEIGHT/2
+    @angle = 45
+    @angle = 5
   end
 
   def x1; @x - SIZE/2; end
@@ -21,5 +23,17 @@ class Ball
       x2, y2, color,
       x2, y1, color,
       )
+  end
+
+  def update
+    @ball.move!
+  end
+
+  def move!
+    dx = Gosu.offset_x(angle, speed)
+    dy = Gosu.offset_y(angle, speed)
+
+    @x += dx
+    @y += dy
   end
 end
