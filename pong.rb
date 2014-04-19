@@ -60,6 +60,14 @@ class Pong < Hasu::Window
     if button_down?(Gosu::KbS)
       @left_paddle.down!
     end
+
+    if @ball.intersect?(@left_paddle)
+      @ball.bounce_off_paddle!(@left_paddle)
+    end
+
+    if @ball.intersect?(@right_paddle)
+      @ball.bounce_off_paddle!(@right_paddle)
+    end
   end
 end
 
