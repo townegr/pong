@@ -1,24 +1,24 @@
 class Paddle
-  attr_reader :side, :y
-
+  attr_reader :side, :y, :ai
+  alias ai? ai
   WIDTH = 16
   HEIGHT = 96
   SPEED = 6
 
-  def initialize(side)
+  def initialize(side, ai = false)
+    @ai = ai
     @side = side
     @y = Pong::HEIGHT/2
   end
 
-  def draw(window)
-    color = Gosu::Color::WHITE
-
-    window.draw_quad(
-      x1, y1, color,
-      x1, y2, color,
-      x2, y2, color,
-      x2, y1, color,
-      )
+  def ai_move!(ball)
+    if (y - ball.y).abs > SPEED
+      if y > ball.y
+        up!
+      else
+        down!
+      end
+    end
   end
 
   def x1
@@ -56,5 +56,16 @@ class Paddle
     if y2 > Pong::HEIGHT
       @y = Pong::HEIGHT - HEIGHT/2
     end
+  end
+
+  def draw(window)
+    color = Gosu::Color::WHITE
+
+    window.draw_quad(
+      x1, y1, color,
+      x1, y2, color,
+      x2, y2, color,
+      x2, y1, color,
+      )
   end
 end

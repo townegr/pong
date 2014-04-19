@@ -14,7 +14,7 @@ class Pong < Hasu::Window
 
   def reset
     @ball = Ball.new
-    @left_paddle = Paddle.new(:left)
+    @left_paddle = Paddle.new(:left, true)
     @right_paddle = Paddle.new(:right)
 
     @left_score = 0
@@ -45,20 +45,23 @@ class Pong < Hasu::Window
       @ball = Ball.new
     end
 
+    if @left_paddle.ai?
+      @left_paddle.ai_move!(@ball)
+    else
+      if button_down?(Gosu::KbW)
+        @left_paddle.up!
+      end
+      if button_down?(Gosu::KbS)
+        @left_paddle.down!
+      end
+    end
+
     if button_down?(Gosu::KbUp)
       @right_paddle.up!
     end
 
     if button_down?(Gosu::KbDown)
       @right_paddle.down!
-    end
-
-    if button_down?(Gosu::KbW)
-      @left_paddle.up!
-    end
-
-    if button_down?(Gosu::KbS)
-      @left_paddle.down!
     end
 
     if @ball.intersect?(@left_paddle)
