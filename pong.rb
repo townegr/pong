@@ -1,5 +1,7 @@
 require 'hasu'
-require 'pry'
+
+# add multi-player mode
+# add gameover
 
 Hasu.load 'ball.rb'
 Hasu.load 'paddle.rb'
@@ -35,15 +37,15 @@ class Pong < Hasu::Window
   def update
     @ball.move!
 
-    if @ball.off_left?
-      @right_score += 1
-      @ball = Ball.new
-    end
+      if @ball.off_left?
+        @right_score += 1
+        @ball = Ball.new
+      end
 
-    if @ball.off_right?
-      @left_score += 1
-      @ball = Ball.new
-    end
+      if @ball.off_right?
+        @left_score += 1
+        @ball = Ball.new
+      end
 
     if @left_paddle.ai?
       @left_paddle.ai_move!(@ball)
